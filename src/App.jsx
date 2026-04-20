@@ -1,8 +1,12 @@
 function App() {
   return (
-    <div>
-      <h1>Karibu Simba Supermarket!</h1>
-    </div>
+    <>
+      <div className="hero">
+        <h1>Karibu Simba Supermarket!</h1>
+        <p>Fresh groceries, delivered across Kigali.</p>
+        <img src="https://placehold.co/600x300" />
+      </div>
+    </>
   )
 }
 
