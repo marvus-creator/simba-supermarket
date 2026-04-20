@@ -8,6 +8,10 @@ import { PRODUCTS } from './data/products'
 function App() {
   const [showSpecial, setShowSpecial] = useState(false)
 
+  function handleAddToCart(product) {
+    console.log("Added:", product.name)
+  }
+
   return (
     <>
       <Header />
@@ -15,7 +19,9 @@ function App() {
       <button onClick={() => setShowSpecial(!showSpecial)}>
         Show Today's Special
       </button>
-      {showSpecial && <ProductCard product={PRODUCTS[0]} />}
+      {showSpecial && (
+        <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />
+      )}
       <Footer />
     </>
   )
