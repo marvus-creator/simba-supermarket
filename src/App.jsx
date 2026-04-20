@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Footer from './components/Footer'
 import ProductCard from './components/ProductCard'
+import ProductList from './components/ProductList'
 import SearchBar from './components/SearchBar'
 import { PRODUCTS } from './data/products'
 
@@ -29,11 +30,7 @@ function App() {
         <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />
       )}
       <SearchBar query={query} onSearch={setQuery} />
-      <div>
-        {visible.map(p => (
-          <ProductCard key={p.id} product={p} onAddToCart={handleAddToCart} />
-        ))}
-      </div>
+      <ProductList products={visible} onAddToCart={handleAddToCart} />
       <Footer />
     </>
   )
