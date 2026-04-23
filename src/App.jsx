@@ -21,10 +21,10 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header name= "Malvyn"/>
       <Hero />
-      <button onClick={() => setShowSpecial(!showSpecial)}>
-        Show Today's Special
+      <button className="special-btn" onClick={() => setShowSpecial(!showSpecial)}>
+        {showSpecial ? "Hide Today's Special" : "Show Today's Special"}
       </button>
       {showSpecial && (
         <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />

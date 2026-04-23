@@ -1,6 +1,6 @@
 function SearchBar({ query, onSearch }) {
   return (
-    <div>
+    <div className="search-bar">
       <input
         type="text"
         value={query}
