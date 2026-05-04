@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Footer from './components/Footer'
@@ -11,8 +11,15 @@ import { PRODUCTS } from './data/products'
 function App() {
   const [showSpecial, setShowSpecial] = useState(false)
   const [query, setQuery] = useState('')
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem('simba-cart')
+    return saved ? JSON.parse(saved) : []
+  })
   const [showCart, setShowCart] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem('simba-cart', JSON.stringify(cart))
+  }, [cart])
 
   const visible = PRODUCTS.filter(p =>
     p.name.toLowerCase().includes(query.toLowerCase())
