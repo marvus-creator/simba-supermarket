@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Header name= "Malvyn"/>
+      <Header />
       <Hero />
       <button className="special-btn" onClick={() => setShowSpecial(!showSpecial)}>
         {showSpecial ? "Hide Today's Special" : "Show Today's Special"}

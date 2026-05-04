@@ -1,5 +1,5 @@
 function ProductCard({ product, onAddToCart }) {
-  const { name, priceRwf, image } = product
+  const { name, priceRwf, image, inStock } = product
 
   const formattedPrice = new Intl.NumberFormat('en-RW', {
     style: 'currency',
@@ -11,7 +11,11 @@ function ProductCard({ product, onAddToCart }) {
       <img src={image} alt={name} />
       <h3>{name}</h3>
       <p>{formattedPrice}</p>
-      <button onClick={() => onAddToCart(product)}>Add to cart</button>
+      {inStock ? (
+        <button onClick={() => onAddToCart(product)}>Add to cart</button>
+      ) : (
+        <p style={{ color: 'red' }}>Out of Stock</p>
+      )}
     </div>
   )
 }
