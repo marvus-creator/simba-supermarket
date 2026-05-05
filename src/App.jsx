@@ -16,12 +16,33 @@ function App() {
     return saved ? JSON.parse(saved) : []
   })
   const [showCart, setShowCart] = useState(false)
+  const [products, setProducts] = useState(PRODUCTS)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('simba-cart', JSON.stringify(cart))
   }, [cart])
 
-  const visible = PRODUCTS.filter(p =>
+  useEffect(() => {
+    setLoading(true)
+    fetch('https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch')
+        return res.json()
+      })
+      .then(() => {
+        setProducts(PRODUCTS)
+        setLoading(false)
+      })
+      .catch(() => {
+        setProducts(PRODUCTS)
+        setError(null)
+        setLoading(false)
+      })
+  }, [])
+
+  const visible = products.filter(p =>
     p.name.toLowerCase().includes(query.toLowerCase())
   )
 
@@ -40,7 +61,13 @@ function App() {
         <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />
       )}
       <SearchBar query={query} onSearch={setQuery} />
-      <ProductList products={visible} onAddToCart={handleAddToCart} />
+      {loading ? (
+        <p style={{ textAlign: 'center', margin: '32px', color: '#666' }}>Loading products...</p>
+      ) : error ? (
+        <p style={{ textAlign: 'center', margin: '32px', color: 'red' }}>{error}</p>
+      ) : (
+        <ProductList products={visible} onAddToCart={handleAddToCart} />
+      )}
       <Footer />
       {showCart && <CartModal cart={cart} onClose={() => setShowCart(false)} />}
     </>
