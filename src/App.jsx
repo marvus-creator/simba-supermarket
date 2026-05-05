@@ -62,8 +62,10 @@ function App() {
         {showSpecial ? "Hide Today's Special" : "Show Today's Special"}
       </button>
       {showSpecial && (
-        <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />
-      )}
+  <div style={{ maxWidth: '250px', margin: '0 auto' }}>
+    <ProductCard product={PRODUCTS[0]} onAddToCart={handleAddToCart} />
+  </div>
+)}
       <SearchBar query={query} onSearch={setQuery} />
       {loading ? (
         <p style={{ textAlign: 'center', margin: '32px', color: '#666' }}>Loading products...</p>
