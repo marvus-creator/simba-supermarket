@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
-function CartModal({ cart, onClose }) {
+function CartModal({ cart, onClose, onRemove }) {
   const closeRef = useRef(null)
 
   useEffect(() => {
@@ -44,13 +44,30 @@ function CartModal({ cart, onClose }) {
               <div key={index} style={{
                 display: 'flex',
                 justifyContent: 'space-between',
+                alignItems: 'center',
                 padding: '8px 0',
                 borderBottom: '1px solid #eee'
               }}>
                 <span>{item.name}</span>
-                <span style={{ color: '#1a7a4a', fontWeight: 'bold' }}>
-                  {new Intl.NumberFormat('en-RW', { style: 'currency', currency: 'RWF' }).format(item.priceRwf)}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#1a7a4a', fontWeight: 'bold' }}>
+                    {new Intl.NumberFormat('en-RW', { style: 'currency', currency: 'RWF' }).format(item.priceRwf)}
+                  </span>
+                  <button
+                    onClick={() => onRemove(index)}
+                    style={{
+                      backgroundColor: 'red',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      padding: '4px 10px',
+                      cursor: 'pointer',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
             ))}
             <div style={{

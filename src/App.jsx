@@ -50,6 +50,10 @@ function App() {
     setCart(prev => [...prev, product])
   }
 
+  function handleRemove(index) {
+    setCart(prev => prev.filter((_, i) => i !== index))
+  }
+
   return (
     <>
       <Header cartCount={cart.length} onCartClick={() => setShowCart(true)} />
@@ -69,7 +73,13 @@ function App() {
         <ProductList products={visible} onAddToCart={handleAddToCart} />
       )}
       <Footer />
-      {showCart && <CartModal cart={cart} onClose={() => setShowCart(false)} />}
+      {showCart && (
+        <CartModal
+          cart={cart}
+          onClose={() => setShowCart(false)}
+          onRemove={handleRemove}
+        />
+      )}
     </>
   )
 }
